@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix Movie Analysis | Krishi Patel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0b1a;
+      color: #d4cce8;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* NAVBAR */
+    nav {
+      background-color: #090714;
+      padding: 18px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e1a3a;
+    }
+    nav .brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: #a78bfa;
+      text-decoration: none;
+    }
+
+    /* PAGE WRAPPER */
+    .wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      background-color: #17112a;
+      color: #a78bfa;
+      border: 1px solid #2a1a5a;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    /* HEADINGS */
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 20px 0;
+      line-height: 1.15;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 48px 0 12px 0;
+    }
+
+    /* PARAGRAPH */
+    p {
+      color: #7a6aaa;
+      margin: 0 0 16px 0;
+    }
+
+    /* DIVIDER */
+    hr {
+      border: none;
+      border-top: 1px solid #1e1a3a;
+      margin: 50px 0;
+    }
+
+    /* SECTION LABEL */
+    .label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #7c3aed;
+      margin-bottom: 8px;
+    }
+
+    /* BUTTON */
+    .btn-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .btn {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-purple {
+      background-color: #6d28d9;
+      color: #ffffff;
+    }
+    .btn-purple:hover { background-color: #5b21b6; }
+
+    /* SCREENSHOT — FULL WIDTH */
+    .screenshot-large {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #1e1a3a;
+      margin: 20px 0 8px 0;
+      display: block;
+    }
+
+    /* SIDE BY SIDE — 2 IMAGES */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0 8px 0;
+    }
+
+    /* 2x2 GRID — 4 IMAGES */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0 8px 0;
+    }
+
+    .grid-2 img,
+    .grid-2x2 img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #1e1a3a;
+      display: block;
+    }
+
+    .caption {
+      font-size: 12px;
+      color: #3d2a6a;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    /* BULLET LIST */
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin: 12px 0 0 0;
+    }
+    ul li {
+      color: #7a6aaa;
+      padding: 8px 0;
+      border-bottom: 1px solid #17112a;
+      padding-left: 18px;
+      position: relative;
+    }
+    ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: #7c3aed;
+      font-weight: 700;
+    }
+    ul li:last-child { border-bottom: none; }
+    ul li strong { color: #d4cce8; }
+
+    /* FOOTER */
+    footer {
+      background-color: #090714;
+      border-top: 1px solid #1e1a3a;
+      padding: 28px 60px;
+      text-align: center;
+      font-size: 13px;
+      color: #3d2a6a;
+    }
+    footer strong { color: #7a6aaa; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .wrapper { padding: 40px 20px 60px; }
+      h1 { font-size: 28px; }
+      .grid-2, .grid-2x2 { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="brand" href="#">Krishi Patel</a>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="badge">Data Analytics Project · Python</div>
+  <h1>Netflix Movie Analysis</h1>
+  <p>
+    There are thousands of movies on Netflix. But which ones are people actually watching,
+    rating, and talking about?
+  </p>
+  <p>
+    I analysed 9,827 Netflix movies using Python, answering five real business questions
+    about genre trends, popularity, ratings, and release patterns. The kind of questions a
+    streaming platform, production house, or content team needs answered before making their
+    next big decision.
+  </p>
+
+  <hr />
+
+  <!-- ANALYSIS SECTION -->
+  <div id="analysis">
+    <div class="label">Python Analysis</div>
+    <h2>See the analysis</h2>
+    <p>
+      This is a complete exploratory data analysis built in Python using Pandas for data
+      cleaning and analysis, and Matplotlib and Seaborn for visualisations. Every question
+      is answered with clean code and a clear chart.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn btn-purple"
+         href="https://nbviewer.org/github/Krishi-Patel5/Netflix-Python-Project-webpage/blob/main/Netflix%20Movie%20Python%20Project.ipynb"
+         target="_blank">
+        View Notebook →
+      </a>
+    </div>
+
+    <!-- 2 CODE SCREENSHOTS SIDE BY SIDE -->
+  
+      <div class="grid-2">
+        <img src="assets/code-1.png" alt="Code Screenshot 1" />
+        <img src="assets/code-2.png" alt="Code Screenshot 2" />
+      </div>
+      <p class="caption">Python Code - Data Cleaning & Analysis</p>
+
+    <!-- 4 CHART SCREENSHOTS IN 2x2 GRID -->
+      <div class="grid-2x2">
+        <img src="assets/chart-1.png" alt="Top 10 Genres" />
+        <img src="assets/chart-2.png" alt="Top 10 Highest Rated Movies" />
+        <img src="assets/chart-3.png" alt="Top 5 Most Popular Movies" />
+        <img src="assets/chart-4.png" alt="Top 5 Years with Most Movies" />
+      </div>
+      <p class="caption">Analysis Charts - Genre, Ratings, Popularity & Yearly Trends</p>
+
+  </div>
+
+  <hr />
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="label">About This Project</div>
+    <h2>What problem does this solve?</h2>
+    <p>
+      Imagine you work at a content production company. You have a budget to create new movies.
+      You need to decide which genre should you invest in? What year had the most competition?
+      And what does a movie need to get a high rating?
+    </p>
+    <p>
+      Making those decisions based on gut feeling is expensive. Making them based on 9,827
+      movies worth of real data is strategy.
+    </p>
+    <p>
+      I took a complete Netflix movie dataset covering release dates, genres, popularity
+      scores, vote counts, vote averages, and languages cleaned it, analysed it, and
+      answered five specific questions that matter to anyone in the content or media business.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- PROCESS -->
+  <div id="process">
+    <div class="label">How I Did It</div>
+    <h2>Here is my process</h2>
+    <ul>
+      <li><strong>Loaded and explored the dataset</strong> - Read 9,827 movies into a Pandas DataFrame and inspected the structure, data types, and null values</li>
+      <li><strong>Cleaned the data</strong> - Handled missing values, converted date columns to datetime format, and extracted year from release dates</li>
+      <li><strong>Analysed genre distribution</strong> - Exploded multi-genre entries and counted individual genre occurrences across all movies</li>
+      <li><strong>Ranked by popularity and rating</strong> - Sorted movies by popularity score and vote average to find the top and bottom performers</li>
+      <li><strong>Identified yearly trends</strong> - Counted movies released per year to find peak production periods</li>
+      <li><strong>Built visualisations</strong> - Created bar charts using Seaborn and Matplotlib for every question with clean, labelled charts</li>
+    </ul>
+  </div>
+
+  <hr />
+
+  <!-- INSIGHTS -->
+  <div id="insights">
+    <div class="label">What I Found</div>
+    <h2>What the data revealed</h2>
+    <ul>
+      <li><strong>Drama is the most dominant genre on Netflix</strong> - With 3,744 occurrences, Drama appears far more than any other genre. For content creators, the audience demand is clearly there, but the space is also the most crowded</li>
+      <li><strong>Spider-Man: No Way Home is the most popular movie</strong> - With a popularity score of 5,083 nearly 1,300 points ahead of The Batman in second place, it is the most talked-about title in the entire dataset</li>
+      <li><strong>2021 was the biggest year for Netflix movie releases</strong> - 714 movies were released in 2021 alone, followed by 2018 (530), 2017 (510), 2019 (500), and 2016 (470). The streaming boom is clearly visible in the data</li>
+      <li><strong>The lowest popularity movies are virtually invisible</strong> - The United States vs. Billie Holiday and Threads both scored just 13.354 in popularity. A reminder that most content reaches almost no one without the right push</li>
+      <li><strong>High vote average does not always mean high popularity</strong> - The top-rated movies by score are not always the most popular ones. Quality and visibility are two very different things on a streaming platform</li>
+    </ul>
+  </div>
+
+  <hr />
+
+  <!-- TOOLS -->
+  <div>
+    <div class="label">Tools & Skills</div>
+    <h2>Built with</h2>
+    <ul>
+      <li><strong>Python</strong> - Core programming language for the entire analysis</li>
+      <li><strong>Pandas</strong> - Data loading, cleaning, filtering, sorting, and grouping</li>
+      <li><strong>Matplotlib & Seaborn</strong> - Chart creation and visualisation design</li>
+      <li><strong>Exploratory Data Analysis (EDA)</strong> - Structured question-led approach to uncovering patterns in 9,827 movie records</li>
+      <li><strong>Data Cleaning</strong> - Handling null values, datetime conversion, and multi-value column processing</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Krishi Patel</strong> · Netflix Movie Analysis
+</footer>
+
+</body>
+</html>
